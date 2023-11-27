@@ -20,6 +20,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import ch.sebug.taskmanager.ui.theme.TaskManagerTheme
 
 class MainActivity : ComponentActivity() {
@@ -72,6 +73,7 @@ fun NiceWork(modifier: Modifier = Modifier) {
     val niceWork = stringResource(id = R.string.nice_work)
     Text(text = niceWork,
         textAlign = TextAlign.Center,
+        fontSize = 16.sp,
         modifier = modifier.fillMaxWidth())
 }
 
