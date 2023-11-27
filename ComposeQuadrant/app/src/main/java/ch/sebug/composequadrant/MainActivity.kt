@@ -93,9 +93,10 @@ fun Quadrant(
         modifier = modifier
             .background(color)
             .padding(16.dp)
+            .fillMaxSize()
     ) {
         Title(text = title,
-            modifier = modifier)
+            modifier = Modifier)
         Description(text = description)
     }
 }
