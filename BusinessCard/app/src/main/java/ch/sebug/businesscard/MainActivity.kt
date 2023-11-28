@@ -9,7 +9,13 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.rounded.Email
+import androidx.compose.material.icons.rounded.Face
+import androidx.compose.material.icons.rounded.Phone
+import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
@@ -85,9 +91,22 @@ fun ContactInformationList(contactInformation: ContactInformation,
         ) {
         Row {
             Column {
-                Text(text = contactInformation.phoneNumber)
-                Text(text =  contactInformation.socialMediaHandle)
-                Text(text = contactInformation.email)
+                Row {
+                    Icon(Icons.Rounded.Phone, contentDescription = "Phone",
+                        modifier = modifier.padding(end = 8.dp))
+                    Text(text = contactInformation.phoneNumber)
+                }
+                Row {
+                    Icon(Icons.Rounded.Face, contentDescription = "Social Media",
+                        modifier = modifier.padding(end = 8.dp))
+                    Text(text =  contactInformation.socialMediaHandle)
+                }
+                Row {
+                    Icon(Icons.Rounded.Email,
+                        contentDescription = "Email",
+                        modifier = modifier.padding(end = 8.dp))
+                    Text(text = contactInformation.email)
+                }
             }
         }
     }
