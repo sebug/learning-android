@@ -54,7 +54,8 @@ class MainActivity : ComponentActivity() {
 
 @Composable
 fun BusinessCard(contactInformation: ContactInformation, modifier: Modifier = Modifier) {
-    Column(modifier = modifier.fillMaxSize()) {
+    Column(modifier = modifier.fillMaxSize(),
+        verticalArrangement = Arrangement.spacedBy(16.dp)) {
         Heading(contactInformation = contactInformation)
         ContactInformationList(contactInformation = contactInformation)
     }
