@@ -4,7 +4,9 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.size
@@ -46,8 +48,9 @@ class MainActivity : ComponentActivity() {
 
 @Composable
 fun BusinessCard(contactInformation: ContactInformation, modifier: Modifier = Modifier) {
-    Column {
+    Column(modifier = modifier.fillMaxSize()) {
         Heading(contactInformation = contactInformation)
+        ContactInformationList(contactInformation = contactInformation)
     }
 }
 
@@ -55,7 +58,8 @@ fun BusinessCard(contactInformation: ContactInformation, modifier: Modifier = Mo
 fun Heading(contactInformation: ContactInformation, modifier: Modifier = Modifier) {
     val picturePainter = painterResource(id = R.drawable.android_logo)
     Column(modifier = modifier.fillMaxWidth(),
-        horizontalAlignment = Alignment.CenterHorizontally) {
+        horizontalAlignment = Alignment.CenterHorizontally,
+        verticalArrangement = Arrangement.Center) {
         Image(painter = picturePainter,
             contentDescription = null,
             contentScale = ContentScale.Crop,
@@ -68,6 +72,24 @@ fun Heading(contactInformation: ContactInformation, modifier: Modifier = Modifie
             modifier = modifier.fillMaxWidth())
         Text(text = contactInformation.title,
             fontSize = 24.sp)
+    }
+}
+
+@Composable
+fun ContactInformationList(contactInformation: ContactInformation,
+                           modifier: Modifier = Modifier) {
+    Column(modifier = modifier
+        .fillMaxWidth(),
+        horizontalAlignment = Alignment.CenterHorizontally,
+        verticalArrangement = Arrangement.Bottom
+        ) {
+        Row {
+            Column {
+                Text(text = contactInformation.phoneNumber)
+                Text(text =  contactInformation.socialMediaHandle)
+                Text(text = contactInformation.email)
+            }
+        }
     }
 }
 
