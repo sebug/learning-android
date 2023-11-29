@@ -20,6 +20,7 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.annotation.StringRes
+import androidx.annotation.VisibleForTesting
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -176,7 +177,8 @@ fun RoundTheTipRow(
  * according to the local currency.
  * Example would be "$10.00".
  */
-private fun calculateTip(amount: Double,
+@VisibleForTesting
+internal fun calculateTip(amount: Double,
                          tipPercent: Double = 15.0,
                          roundUp: Boolean): String {
     var tip = tipPercent / 100 * amount
