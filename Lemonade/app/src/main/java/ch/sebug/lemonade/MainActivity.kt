@@ -54,7 +54,7 @@ class MainActivity : ComponentActivity() {
 @Composable
 fun LemonadeActionablePicture(initialState: Int = 1, modifier: Modifier = Modifier
     .fillMaxSize()) {
-    Column {
+    Column(modifier = modifier) {
         LemonadeHeader()
         LemonadeActions(initialState = initialState)
     }
@@ -64,6 +64,9 @@ fun LemonadeActionablePicture(initialState: Int = 1, modifier: Modifier = Modifi
 fun LemonadeActions(initialState: Int, modifier: Modifier = Modifier) {
     var state by remember {
         mutableStateOf(initialState)
+    }
+    var numberOfSqueezes by remember {
+        mutableStateOf(2)
     }
     val imageResource = when (state) {
         1 -> R.drawable.lemon_tree
@@ -87,8 +90,26 @@ fun LemonadeActions(initialState: Int, modifier: Modifier = Modifier) {
         else -> R.string.tap_empty_glass
     }
     Column(modifier = modifier
+        .fillMaxSize()
         .wrapContentSize(align = Alignment.Center)) {
-        Button(onClick = { /*TODO*/ },
+        Button(onClick =
+        {
+            var newState: Int = state
+            if (state == 1) {
+                newState = 2
+                numberOfSqueezes = (2..4).random()
+            } else if (state == 2) {
+                numberOfSqueezes -= 1
+                if (numberOfSqueezes <= 0) {
+                    newState = 3
+                }
+            } else if (state == 3) {
+                newState = 4
+            } else {
+                newState = 1
+            }
+            state = newState
+        },
             colors = ButtonDefaults.buttonColors(
                 containerColor = Color(203, 235, 212)
             )
@@ -124,6 +145,6 @@ fun LemonadeHeader(modifier: Modifier = Modifier) {
 @Composable
 fun GreetingPreview() {
     LemonadeTheme {
-        LemonadeActionablePicture()
+        LemonadeActionablePicture(2)
     }
 }
