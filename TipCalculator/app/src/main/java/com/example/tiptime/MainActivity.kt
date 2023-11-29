@@ -77,7 +77,7 @@ class MainActivity : ComponentActivity() {
 fun TipTimeLayout() {
     var amountInput by remember { mutableStateOf( "") }
     val amount = amountInput.toDoubleOrNull() ?: 0.0
-    var tipAmountInput by remember { mutableStateOf("15.0") }
+    var tipAmountInput by remember { mutableStateOf("") }
     val tipAmount = tipAmountInput.toDoubleOrNull() ?: 15.0
     var roundUp by remember { mutableStateOf(false) }
     val tip = calculateTip(amount, tipAmount, roundUp)
