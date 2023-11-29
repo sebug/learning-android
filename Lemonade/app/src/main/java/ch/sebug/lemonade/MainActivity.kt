@@ -5,12 +5,16 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.wrapContentSize
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.MaterialTheme
@@ -89,7 +93,10 @@ fun LemonadeActions(initialState: Int, modifier: Modifier = Modifier) {
         4 -> R.string.tap_empty_glass
         else -> R.string.tap_empty_glass
     }
-    Column(modifier = modifier
+    Column(
+        verticalArrangement = Arrangement.Center,
+        horizontalAlignment = Alignment.CenterHorizontally,
+        modifier = modifier
         .fillMaxSize()
         .wrapContentSize(align = Alignment.Center)) {
         Button(onClick =
@@ -112,7 +119,12 @@ fun LemonadeActions(initialState: Int, modifier: Modifier = Modifier) {
         },
             colors = ButtonDefaults.buttonColors(
                 containerColor = Color(203, 235, 212)
-            )
+            ),
+            shape = RoundedCornerShape(32.dp),
+            modifier = Modifier
+                .width(300.dp)
+                .height(300.dp)
+                .padding(16.dp)
         ) {
             Image(painter = painterResource(id = imageResource),
                 contentDescription = stringResource(contentDescriptionResource),
