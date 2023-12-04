@@ -4,7 +4,9 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
@@ -52,7 +54,11 @@ class MainActivity : ComponentActivity() {
 
 @Composable
 fun CoursesGrid(topics: List<Topic>, modifier: Modifier = Modifier) {
-    LazyVerticalGrid(columns = GridCells.Fixed(2)) {
+    LazyVerticalGrid(columns = GridCells.Fixed(2),
+        contentPadding = PaddingValues(8.dp),
+        verticalArrangement = Arrangement.spacedBy(8.dp),
+        horizontalArrangement = Arrangement.spacedBy(8.dp)
+    ) {
         items(topics) { topic ->
             TopicCard(topic = topic, modifier = modifier)
         }
