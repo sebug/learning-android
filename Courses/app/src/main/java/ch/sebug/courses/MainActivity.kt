@@ -9,6 +9,7 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.sizeIn
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
@@ -42,7 +43,7 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                    Greeting("Android")
+                    CoursesGrid(topics = DataSource.topics)
                 }
             }
         }
@@ -51,7 +52,7 @@ class MainActivity : ComponentActivity() {
 
 @Composable
 fun CoursesGrid(topics: List<Topic>, modifier: Modifier = Modifier) {
-    LazyVerticalGrid(columns = GridCells.Adaptive(minSize = 200.dp)) {
+    LazyVerticalGrid(columns = GridCells.Fixed(2)) {
         items(topics) { topic ->
             TopicCard(topic = topic, modifier = modifier)
         }
@@ -87,14 +88,6 @@ fun TopicCard(topic: Topic, modifier: Modifier = Modifier) {
             }
         }
     }
-}
-
-@Composable
-fun Greeting(name: String, modifier: Modifier = Modifier) {
-    Text(
-        text = "Hello $name!",
-        modifier = modifier
-    )
 }
 
 @Preview(showBackground = true)
