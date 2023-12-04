@@ -1,0 +1,11 @@
+{
+  "name": "cat-api-fetcher",
+  "version": "1.0.0",
+  "description": "Fetches some cat pics as resources for the Android apps",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Sebastian",
+  "license": "Apache-2.0"
+}
