@@ -14,7 +14,7 @@ const downloadImage = async (url, fileName) => {
 };
 
 const getAndSaveRandomImages = async () => {
-    const imagesResponse = await fetch('https://api.thecatapi.com/v1/images/search?limit=10');
+    const imagesResponse = await fetch('https://api.thecatapi.com/v1/images/search?limit=14');
     if (imagesResponse.status !== 200) {
 	throw new Error('Could not get the cats - status ' + imagesResponse.status);
     }
