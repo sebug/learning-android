@@ -10,6 +10,9 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.lazy.grid.GridCells
+import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
+import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.MoreVert
 import androidx.compose.material3.Card
@@ -47,13 +50,23 @@ class MainActivity : ComponentActivity() {
 }
 
 @Composable
+fun CoursesGrid(topics: List<Topic>, modifier: Modifier = Modifier) {
+    LazyVerticalGrid(columns = GridCells.Adaptive(minSize = 200.dp)) {
+        items(topics) { topic ->
+            TopicCard(topic = topic, modifier = modifier)
+        }
+    }
+}
+
+@Composable
 fun TopicCard(topic: Topic, modifier: Modifier = Modifier) {
     Card(modifier = modifier) {
         Row {
             Image(painterResource(id = topic.imageResourceId),
                 contentDescription = stringResource(id = topic.nameResourceId),
                 contentScale = ContentScale.Crop,
-                modifier = Modifier.height(68.dp)
+                modifier = Modifier
+                    .height(68.dp)
                     .width(68.dp))
             Column(modifier = Modifier
                 .padding(start = 16.dp,
@@ -86,8 +99,8 @@ fun Greeting(name: String, modifier: Modifier = Modifier) {
 
 @Preview(showBackground = true)
 @Composable
-fun TopicCardPreview() {
+fun CoursesGridPreview() {
     CoursesTheme {
-        TopicCard(topic = DataSource.topics[2])
+        CoursesGrid(topics = DataSource.topics)
     }
 }
