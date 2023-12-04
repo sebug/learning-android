@@ -3,13 +3,29 @@ package ch.sebug.courses
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.compose.foundation.Image
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.width
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.MoreVert
+import androidx.compose.material3.Card
+import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
+import ch.sebug.courses.data.DataSource
+import ch.sebug.courses.model.Topic
 import ch.sebug.courses.ui.theme.CoursesTheme
 
 class MainActivity : ComponentActivity() {
@@ -30,6 +46,33 @@ class MainActivity : ComponentActivity() {
 }
 
 @Composable
+fun TopicCard(topic: Topic, modifier: Modifier = Modifier) {
+    Card(modifier = modifier) {
+        Row {
+            Image(painterResource(id = topic.imageResourceId),
+                contentDescription = stringResource(id = topic.nameResourceId),
+                contentScale = ContentScale.Crop,
+                modifier = Modifier.height(68.dp)
+                    .width(68.dp))
+            Column(modifier = Modifier
+                .padding(start = 16.dp,
+                    top = 16.dp,
+                    end = 16.dp,
+                    bottom = 0.dp)) {
+                Text(text = stringResource(topic.nameResourceId))
+                Row(modifier = Modifier
+                    .padding(top = 8.dp)) {
+                    Icon(Icons.Default.MoreVert,
+                        contentDescription = "Details",
+                        modifier = Modifier.padding(end = 8.dp))
+                    Text(text = topic.numberOfParticipants.toString())
+                }
+            }
+        }
+    }
+}
+
+@Composable
 fun Greeting(name: String, modifier: Modifier = Modifier) {
     Text(
         text = "Hello $name!",
@@ -39,8 +82,8 @@ fun Greeting(name: String, modifier: Modifier = Modifier) {
 
 @Preview(showBackground = true)
 @Composable
-fun GreetingPreview() {
+fun TopicCardPreview() {
     CoursesTheme {
-        Greeting("Android")
+        TopicCard(topic = DataSource.topics[2])
     }
 }
