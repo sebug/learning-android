@@ -18,6 +18,7 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
@@ -59,13 +60,16 @@ fun TopicCard(topic: Topic, modifier: Modifier = Modifier) {
                     top = 16.dp,
                     end = 16.dp,
                     bottom = 0.dp)) {
-                Text(text = stringResource(topic.nameResourceId))
+                Text(text = stringResource(topic.nameResourceId),
+                    style = MaterialTheme.typography.bodyMedium)
                 Row(modifier = Modifier
-                    .padding(top = 8.dp)) {
+                    .padding(top = 8.dp),
+                    verticalAlignment = Alignment.CenterVertically) {
                     Icon(Icons.Default.MoreVert,
                         contentDescription = "Details",
                         modifier = Modifier.padding(end = 8.dp))
-                    Text(text = topic.numberOfParticipants.toString())
+                    Text(text = topic.numberOfParticipants.toString(),
+                        style = MaterialTheme.typography.labelMedium)
                 }
             }
         }
