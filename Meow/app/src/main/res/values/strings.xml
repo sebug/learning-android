@@ -20,4 +20,5 @@
     <string name="cat_7_description">Simba is a playful and energetic cat with a mane-like ruff of fur around his neck. He has a strong and confident personality, often taking on the role of the household\'s playful lion, chasing after imaginary prey with gusto.</string>
     <string name="cat_8_description">Mocha is a sweet and gentle cat with a rich, chocolate-colored coat. She\'s known for her calming presence and enjoys snuggling up on laps during quiet moments. Mocha is the epitome of comfort and warmth.</string>
     <string name="cat_9_description">Midnight is a nocturnal and mysterious cat with a jet-black coat that glistens like the night sky. She comes alive in the late hours, exploring the house with a sense of quiet curiosity and a touch of magical charm.</string>
+    <string name="years_old">%d years old</string>
 </resources>
