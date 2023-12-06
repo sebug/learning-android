@@ -14,6 +14,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
+import androidx.compose.material3.Card
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
@@ -48,7 +49,8 @@ class MainActivity : ComponentActivity() {
 fun MeowApp() {
     LazyColumn {
         items(cats) {
-            CatItem(cat = it)
+            CatItem(cat = it,
+                modifier = Modifier.padding(dimensionResource(R.dimen.padding_small)))
         }
     }
 }
@@ -56,13 +58,15 @@ fun MeowApp() {
 @Composable
 fun CatItem(cat: Cat,
             modifier: Modifier = Modifier) {
-    Row(
-        modifier = modifier
-            .fillMaxWidth()
-            .padding(dimensionResource(R.dimen.padding_small))
-    ) {
-        CatIcon(cat.imageResourceId)
-        CatInformation(cat.name, cat.age)
+    Card(modifier = modifier) {
+        Row(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(dimensionResource(R.dimen.padding_small))
+        ) {
+            CatIcon(cat.imageResourceId)
+            CatInformation(cat.name, cat.age)
+        }
     }
 }
 
@@ -96,6 +100,14 @@ fun CatInformation(
         Text(
             text = stringResource(R.string.years_old, catAge),
         )
+    }
+}
+
+@Preview(showBackground = true)
+@Composable
+fun MeowDarkThemeAppPreview() {
+    MeowTheme(darkTheme = true) {
+        MeowApp()
     }
 }
 
