@@ -1,3 +1,23 @@
 <resources>
     <string name="app_name">Meow</string>
+    <string name="cat_0_name">Whiskers</string>
+    <string name="cat_1_name">Luna</string>
+    <string name="cat_2_name">Oliver</string>
+    <string name="cat_3_name">Mittens</string>
+    <string name="cat_4_name">Shadow</string>
+    <string name="cat_5_name">Tiger</string>
+    <string name="cat_6_name">Cleo</string>
+    <string name="cat_7_name">Simba</string>
+    <string name="cat_8_name">Mocha</string>
+    <string name="cat_9_name">Midnight</string>
+    <string name="cat_0_description">Whiskers is an adventurous and curious cat with long, elegant whiskers that twitch with excitement as he explores every nook and cranny of his surroundings. He\'s playful and always ready for a game of chase or pounce.</string>
+    <string name="cat_1_description">Luna is a graceful and mysterious feline with a sleek, black coat that shimmers in the moonlight. She\'s independent and enjoys spending her evenings perched on high places, observing the world below with a regal air.</string>
+    <string name="cat_2_description">Oliver is a charming and affectionate cat with a fluffy orange coat and big, soulful eyes. He loves cuddling and is known for his gentle nature, making him the perfect companion for cozy nights on the couch.</string>
+    <string name="cat_3_description">Mittens is a playful and mischievous cat with distinct white paws that resemble mittens. She\'s a skilled hunter of toy mice and has a talent for turning everyday objects into her personal playground.</string>
+    <string name="cat_4_description">Shadow is a mysterious and enigmatic cat who moves silently through the house, almost like a phantom. With a sleek, all-black coat and piercing green eyes, Shadow is the master of stealth and observation.</string>
+    <string name="cat_5_description">Tiger is a bold and adventurous tabby cat with striking orange and black stripes that resemble a miniature jungle cat. He loves exploring the great outdoors and has a fearless spirit when it comes to climbing trees.</string>
+    <string name="cat_6_description">Cleo is a regal and elegant cat with a luxurious coat of silky fur. She carries herself with grace and sophistication, making her the queen of the household. Cleo enjoys basking in the sun and receiving royal treatment.</string>
+    <string name="cat_7_description">Simba is a playful and energetic cat with a mane-like ruff of fur around his neck. He has a strong and confident personality, often taking on the role of the household\'s playful lion, chasing after imaginary prey with gusto.</string>
+    <string name="cat_8_description">Mocha is a sweet and gentle cat with a rich, chocolate-colored coat. She\'s known for her calming presence and enjoys snuggling up on laps during quiet moments. Mocha is the epitome of comfort and warmth.</string>
+    <string name="cat_9_description">Midnight is a nocturnal and mysterious cat with a jet-black coat that glistens like the night sky. She comes alive in the late hours, exploring the house with a sense of quiet curiosity and a touch of magical charm.</string>
 </resources>
