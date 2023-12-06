@@ -21,4 +21,6 @@
     <string name="cat_8_description">Mocha is a sweet and gentle cat with a rich, chocolate-colored coat. She\'s known for her calming presence and enjoys snuggling up on laps during quiet moments. Mocha is the epitome of comfort and warmth.</string>
     <string name="cat_9_description">Midnight is a nocturnal and mysterious cat with a jet-black coat that glistens like the night sky. She comes alive in the late hours, exploring the house with a sense of quiet curiosity and a touch of magical charm.</string>
     <string name="years_old">%d years old</string>
+    <string name="expand_button_content_description">Expand</string>
+    <string name="about">About</string>
 </resources>
