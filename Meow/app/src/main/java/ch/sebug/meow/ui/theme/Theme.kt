@@ -84,7 +84,7 @@ private val DarkColors = darkColorScheme(
 @Composable
 fun MeowTheme(
     darkTheme: Boolean = isSystemInDarkTheme(),
-    dynamicColor: Boolean = true,
+    dynamicColor: Boolean = false,
     content: @Composable() () -> Unit
 ) {
     val colorScheme = when {
@@ -108,6 +108,7 @@ fun MeowTheme(
     MaterialTheme(
         colorScheme = colorScheme,
         typography = Typography,
+        shapes = Shapes,
         content = content
     )
 }
