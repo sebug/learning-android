@@ -100,7 +100,14 @@ fun CupcakeApp(
                     onSelectionChanged = { viewModel.setDate(it)})
             }
             composable(route = CupcakeScreen.Summary.name) {
-                OrderSummaryScreen(orderUiState = uiState)
+                OrderSummaryScreen(orderUiState = uiState,
+                    onCancelButtonClicked = {
+
+                    },
+                    onSendButtonClicked = {
+                        fst, snd ->
+
+                    })
             }
         }
     }
