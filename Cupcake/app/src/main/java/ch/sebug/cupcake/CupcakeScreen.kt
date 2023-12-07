@@ -84,7 +84,9 @@ fun CupcakeApp(
             modifier = Modifier.padding(innerPadding)
             ) {
             composable(route = CupcakeScreen.Start.name) {
-                StartOrderScreen(quantityOptions = DataSource.quantityOptions)
+                StartOrderScreen(quantityOptions = DataSource.quantityOptions,
+                    onNextButtonClicked = {
+                    })
             }
             composable(route = CupcakeScreen.Flavor.name) {
                 val context = LocalContext.current
