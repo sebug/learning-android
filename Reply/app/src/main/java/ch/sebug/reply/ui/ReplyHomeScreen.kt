@@ -36,9 +36,11 @@ import ch.sebug.reply.R
 import ch.sebug.reply.data.Email
 import ch.sebug.reply.data.MailboxType
 import ch.sebug.reply.data.local.LocalAccountsDataProvider
+import ch.sebug.reply.ui.utils.ReplyNavigationType
 
 @Composable
 fun ReplyHomeScreen(
+    navigationType: ReplyNavigationType,
     replyUiState: ReplyUiState,
     onTabPressed: (MailboxType) -> Unit,
     onEmailCardPressed: (Email) -> Unit,
