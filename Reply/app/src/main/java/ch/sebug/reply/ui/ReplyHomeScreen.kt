@@ -42,11 +42,13 @@ import ch.sebug.reply.R
 import ch.sebug.reply.data.Email
 import ch.sebug.reply.data.MailboxType
 import ch.sebug.reply.data.local.LocalAccountsDataProvider
+import ch.sebug.reply.ui.utils.ReplyContentType
 import ch.sebug.reply.ui.utils.ReplyNavigationType
 
 @Composable
 fun ReplyHomeScreen(
     navigationType: ReplyNavigationType,
+    contentType: ReplyContentType,
     replyUiState: ReplyUiState,
     onTabPressed: (MailboxType) -> Unit,
     onEmailCardPressed: (Email) -> Unit,
@@ -94,6 +96,7 @@ fun ReplyHomeScreen(
         }) {
             ReplyAppContent(
                 navigationType = navigationType,
+                contentType = contentType,
                 replyUiState = replyUiState,
                 onTabPressed = onTabPressed,
                 onEmailCardPressed = onEmailCardPressed,
@@ -104,6 +107,7 @@ fun ReplyHomeScreen(
         if (replyUiState.isShowingHomepage) {
             ReplyAppContent(
                 navigationType = navigationType,
+                contentType = contentType,
                 replyUiState = replyUiState,
                 onTabPressed = onTabPressed,
                 onEmailCardPressed = onEmailCardPressed,
@@ -120,6 +124,7 @@ fun ReplyHomeScreen(
 @Composable
 private fun ReplyAppContent(
     navigationType: ReplyNavigationType,
+    contentType: ReplyContentType,
     replyUiState: ReplyUiState,
     onTabPressed: ((MailboxType) -> Unit),
     onEmailCardPressed: (Email) -> Unit,
