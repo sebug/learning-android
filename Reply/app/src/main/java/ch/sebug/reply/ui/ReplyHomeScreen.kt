@@ -78,8 +78,7 @@ fun ReplyHomeScreen(
         )
     )
 
-    if (navigationType == ReplyNavigationType.PERMANENT_NAVIGATION_DRAWER &&
-        replyUiState.isShowingHomepage) {
+    if (navigationType == ReplyNavigationType.PERMANENT_NAVIGATION_DRAWER) {
         PermanentNavigationDrawer(drawerContent = {
             PermanentDrawerSheet(Modifier.width(dimensionResource(R.dimen.drawer_width))) {
                 NavigationDrawerContent(
@@ -144,15 +143,23 @@ private fun ReplyAppContent(
                     MaterialTheme.colorScheme.inverseOnSurface
                 )
         ) {
-            ReplyListOnlyContent(
-                replyUiState = replyUiState,
-                onEmailCardPressed = onEmailCardPressed,
-                modifier = Modifier
-                    .weight(1f)
-                    .padding(
-                        horizontal = dimensionResource(R.dimen.email_list_only_horizontal_padding)
-                    )
-            )
+            if (contentType == ReplyContentType.LIST_AND_DETAIL) {
+                ReplyListAndDetailContent(
+                    replyUiState = replyUiState,
+                    onEmailCardPressed = onEmailCardPressed,
+                    modifier = Modifier.weight(1f)
+                )
+            } else {
+                ReplyListOnlyContent(
+                    replyUiState = replyUiState,
+                    onEmailCardPressed = onEmailCardPressed,
+                    modifier = Modifier
+                        .weight(1f)
+                        .padding(
+                            horizontal = dimensionResource(R.dimen.email_list_only_horizontal_padding)
+                        )
+                )
+            }
             AnimatedVisibility(visible = navigationType == ReplyNavigationType.BOTTOM_NAVIGATION) {
                 ReplyBottomNavigationBar(
                     currentTab = replyUiState.currentMailbox,
