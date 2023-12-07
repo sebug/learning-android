@@ -105,4 +105,33 @@ class CupcakeScreenNavigationTest {
         navigateToPickupScreen()
         navController.assertCurrentRouteName(CupcakeScreen.Pickup.name)
     }
+
+    @Test
+    fun cupcakeNavHost_clickUpButtonFromPickupScreen_navigatesToFlavorScreen() {
+        navigateToPickupScreen()
+        navigateUp()
+        navController.assertCurrentRouteName(CupcakeScreen.Flavor.name)
+    }
+
+    @Test
+    fun cupcakeNavhost_clickCancelButtonFromPickupScreen_navigatesToHomeScreen() {
+        navigateToPickupScreen()
+        composeTestRule.onNodeWithStringId(ch.sebug.cupcake.R.string.cancel)
+            .performClick()
+        navController.assertCurrentRouteName(CupcakeScreen.Start.name)
+    }
+
+    @Test
+    fun cupcakeNavHost_clickNextButton_navigatesToSummaryScreen() {
+        navigateToSummaryScreen()
+        navController.assertCurrentRouteName(CupcakeScreen.Summary.name)
+    }
+
+    @Test
+    fun cupcakeNavHost_clickCancelButtonFromSummaryScreen_navigatesToHomeScreen() {
+        navigateToSummaryScreen()
+        composeTestRule.onNodeWithStringId(ch.sebug.cupcake.R.string.cancel)
+            .performClick()
+        navController.assertCurrentRouteName(CupcakeScreen.Start.name)
+    }
 }
