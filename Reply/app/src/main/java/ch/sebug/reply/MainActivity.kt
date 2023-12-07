@@ -44,3 +44,23 @@ fun ReplyPreview() {
         )
     }
 }
+
+@Preview(showBackground = true, widthDp = 700)
+@Composable
+fun ReplyMediumPreview() {
+    ReplyTheme {
+        ReplyApp(
+            windowSize = WindowWidthSizeClass.Medium
+        )
+    }
+}
+
+@Preview(showBackground = true, widthDp = 1000)
+@Composable
+fun ReplyExpandedPreview() {
+    ReplyTheme {
+        ReplyApp(
+            windowSize = WindowWidthSizeClass.Expanded
+        )
+    }
+}
