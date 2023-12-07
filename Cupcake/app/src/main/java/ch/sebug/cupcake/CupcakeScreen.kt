@@ -15,6 +15,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
@@ -22,7 +23,9 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import ch.sebug.cupcake.data.DataSource
+import ch.sebug.cupcake.ui.OrderSummaryScreen
 import ch.sebug.cupcake.ui.OrderViewModel
+import ch.sebug.cupcake.ui.SelectOptionScreen
 import ch.sebug.cupcake.ui.StartOrderScreen
 
 enum class CupcakeScreen() {
@@ -82,6 +85,20 @@ fun CupcakeApp(
             ) {
             composable(route = CupcakeScreen.Start.name) {
                 StartOrderScreen(quantityOptions = DataSource.quantityOptions)
+            }
+            composable(route = CupcakeScreen.Flavor.name) {
+                val context = LocalContext.current
+                SelectOptionScreen(subtotal = uiState.price,
+                    options = DataSource.flavors.map { context.resources.getString(it) },
+                    onSelectionChanged = { viewModel.setFlavor(it) })
+            }
+            composable(route = CupcakeScreen.Pickup.name) {
+                SelectOptionScreen(subtotal = uiState.price,
+                    options = uiState.pickupOptions,
+                    onSelectionChanged = { viewModel.setDate(it)})
+            }
+            composable(route = CupcakeScreen.Summary.name) {
+                OrderSummaryScreen(orderUiState = uiState)
             }
         }
     }
