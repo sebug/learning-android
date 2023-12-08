@@ -28,7 +28,7 @@ class RaceParticipantTest {
         launch {
             raceParticipant.run()
         }
-        advanceTimeBy(raceParticipant.progressDelayMillis * 100)
+        advanceTimeBy(raceParticipant.progressDelayMillis * raceParticipant.maxProgress)
         runCurrent()
         assertEquals(expectedProgress, raceParticipant.currentProgress)
     }
