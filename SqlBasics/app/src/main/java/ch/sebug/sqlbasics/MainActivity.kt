@@ -13,10 +13,15 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import ch.sebug.sqlbasics.ui.theme.SQLBasicsTheme
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        GlobalScope.launch {
+            AppDatabase.getDatabase(applicationContext).emailDao().getAll()
+        }
         setContent {
             SQLBasicsTheme {
                 // A surface container using the 'background' color from the theme
