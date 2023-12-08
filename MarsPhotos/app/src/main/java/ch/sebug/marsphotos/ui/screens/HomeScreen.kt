@@ -29,7 +29,7 @@ fun HomeScreen(
 ) {
     when (marsUiState) {
         is MarsUiState.Success -> {
-            ResultScreen(photo = marsUiState.photo, modifier = modifier)
+            ResultScreen(photos = marsUiState.photos, modifier = modifier)
         }
         is MarsUiState.Loading -> LoadingScreen(modifier = modifier.fillMaxSize())
         is MarsUiState.Error -> ErrorScreen( modifier = modifier.fillMaxSize())
@@ -63,14 +63,16 @@ fun LoadingScreen(modifier: Modifier) {
  * ResultScreen displaying number of photos retrieved.
  */
 @Composable
-fun ResultScreen(photo: MarsPhoto, modifier: Modifier = Modifier) {
+fun ResultScreen(photos: List<MarsPhoto>, modifier: Modifier = Modifier) {
     Box(
         contentAlignment = Alignment.Center,
         modifier = modifier
     ) {
-        MarsPhotoCard(photo = photo)
+        MarsPhotoCard(photo = photos.first())
     }
 }
+
+
 
 @Composable
 fun MarsPhotoCard(photo: MarsPhoto, modifier: Modifier = Modifier) {
@@ -79,6 +81,8 @@ fun MarsPhotoCard(photo: MarsPhoto, modifier: Modifier = Modifier) {
         .crossfade(true)
         .build()
         , contentDescription = stringResource(R.string.mars_photo),
+        error = painterResource(R.drawable.ic_broken_image),
+        placeholder = painterResource(R.drawable.loading_img),
         modifier = Modifier.fillMaxWidth()
     )
 }
@@ -87,6 +91,6 @@ fun MarsPhotoCard(photo: MarsPhoto, modifier: Modifier = Modifier) {
 @Composable
 fun ResultScreenPreview() {
     MarsPhotosTheme {
-        ResultScreen(MarsPhoto("123", "https://mars.jpl.nasa.gov/msl-raw-images/msss/01000/mcam/1000MR0044631300503690E01_DXXX.jpg"))
+        ResultScreen(listOf(MarsPhoto("123", "https://mars.jpl.nasa.gov/msl-raw-images/msss/01000/mcam/1000MR0044631300503690E01_DXXX.jpg")))
     }
 }
