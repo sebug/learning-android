@@ -12,9 +12,14 @@ import ch.sebug.marsphotos.ui.theme.MarsPhotosTheme
 
 @Composable
 fun HomeScreen(
-    marsUiState: String, modifier: Modifier = Modifier
+    marsUiState: MarsUiState, modifier: Modifier = Modifier
 ) {
-    ResultScreen(marsUiState, modifier)
+    val message = when(marsUiState) {
+        is MarsUiState.Error -> "Error"
+        is MarsUiState.Loading -> "Loading photos"
+        is MarsUiState.Success -> marsUiState.photos
+    }
+    ResultScreen(message, modifier)
 }
 
 /**

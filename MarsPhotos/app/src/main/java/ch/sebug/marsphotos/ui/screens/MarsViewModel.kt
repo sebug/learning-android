@@ -1,5 +1,6 @@
 package ch.sebug.marsphotos.ui.screens
 
+import android.util.Log
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
@@ -9,9 +10,15 @@ import ch.sebug.marsphotos.network.MarsApi
 import kotlinx.coroutines.launch
 import java.io.IOException
 
+sealed interface MarsUiState {
+    data class Success(val photos: String) : MarsUiState
+    object Error : MarsUiState
+    object Loading: MarsUiState
+}
+
 class MarsViewModel : ViewModel() {
     /** The mutable State that stores the status of the most recent request */
-    var marsUiState: String by mutableStateOf("")
+    var marsUiState: MarsUiState by mutableStateOf(MarsUiState.Loading)
         private set
 
     /**
@@ -29,9 +36,10 @@ class MarsViewModel : ViewModel() {
         viewModelScope.launch {
             try {
                 val listResult = MarsApi.retrofitService.getPhotos()
-                marsUiState = listResult
+                marsUiState = MarsUiState.Success(listResult)
             } catch (ioe: IOException) {
-                marsUiState = ioe.message ?: "Error connecting"
+                Log.e("MarsPhotos", ioe.message ?: "An IO error occurred")
+                marsUiState = MarsUiState.Error
             }
         }
     }
