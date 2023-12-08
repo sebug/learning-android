@@ -1,6 +1,8 @@
 @file:OptIn(ExperimentalMaterial3Api::class)
 
 package ch.sebug.marsphotos.ui
+import android.os.Build
+import androidx.annotation.RequiresExtension
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.CenterAlignedTopAppBar
@@ -20,6 +22,7 @@ import ch.sebug.marsphotos.R
 import ch.sebug.marsphotos.ui.screens.HomeScreen
 import ch.sebug.marsphotos.ui.screens.MarsViewModel
 
+@RequiresExtension(extension = Build.VERSION_CODES.S, version = 7)
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun MarsPhotosApp() {
@@ -33,7 +36,7 @@ fun MarsPhotosApp() {
                 .fillMaxSize()
                 .padding(it)
         ) {
-            val marsViewModel: MarsViewModel = viewModel()
+            val marsViewModel: MarsViewModel = viewModel(factory = MarsViewModel.Factory)
             HomeScreen(
                 marsUiState = marsViewModel.marsUiState)
         }
