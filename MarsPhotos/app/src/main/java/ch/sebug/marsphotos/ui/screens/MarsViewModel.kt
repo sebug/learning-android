@@ -16,11 +16,12 @@ import androidx.lifecycle.viewmodel.viewModelFactory
 import ch.sebug.marsphotos.MarsPhotosApplication
 import ch.sebug.marsphotos.data.MarsPhotosRepository
 import ch.sebug.marsphotos.data.NetworkMarsPhotosRepository
+import ch.sebug.marsphotos.network.MarsPhoto
 import kotlinx.coroutines.launch
 import java.io.IOException
 
 sealed interface MarsUiState {
-    data class Success(val photos: String) : MarsUiState
+    data class Success(val photo: MarsPhoto) : MarsUiState
     object Error : MarsUiState
     object Loading: MarsUiState
 }
@@ -47,9 +48,8 @@ class MarsViewModel(private val marsPhotosRepository: MarsPhotosRepository) : Vi
         viewModelScope.launch {
             marsUiState = try {
                 val listResult = marsPhotosRepository.getMarsPhotos()
-                val firstUrl = listResult[0].imgSrc
                 MarsUiState.Success(
-                    "Success: ${firstUrl}"
+                    listResult.first()
                 )
             } catch (ioe: IOException) {
                 Log.e("MarsPhotos", ioe.message ?: "An IO error occurred")

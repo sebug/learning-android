@@ -5,18 +5,23 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import ch.sebug.marsphotos.R
+import ch.sebug.marsphotos.network.MarsPhoto
 import ch.sebug.marsphotos.ui.theme.MarsPhotosTheme
+import coil.compose.AsyncImage
+import coil.request.ImageRequest
 
 @Composable
 fun HomeScreen(
@@ -24,7 +29,7 @@ fun HomeScreen(
 ) {
     when (marsUiState) {
         is MarsUiState.Success -> {
-            ResultScreen(photos = marsUiState.photos, modifier = modifier)
+            ResultScreen(photo = marsUiState.photo, modifier = modifier)
         }
         is MarsUiState.Loading -> LoadingScreen(modifier = modifier.fillMaxSize())
         is MarsUiState.Error -> ErrorScreen( modifier = modifier.fillMaxSize())
@@ -58,19 +63,30 @@ fun LoadingScreen(modifier: Modifier) {
  * ResultScreen displaying number of photos retrieved.
  */
 @Composable
-fun ResultScreen(photos: String, modifier: Modifier = Modifier) {
+fun ResultScreen(photo: MarsPhoto, modifier: Modifier = Modifier) {
     Box(
         contentAlignment = Alignment.Center,
         modifier = modifier
     ) {
-        Text(text = photos)
+        MarsPhotoCard(photo = photo)
     }
+}
+
+@Composable
+fun MarsPhotoCard(photo: MarsPhoto, modifier: Modifier = Modifier) {
+    AsyncImage(model = ImageRequest.Builder(context = LocalContext.current)
+        .data(photo.imgSrc)
+        .crossfade(true)
+        .build()
+        , contentDescription = stringResource(R.string.mars_photo),
+        modifier = Modifier.fillMaxWidth()
+    )
 }
 
 @Preview(showBackground = true)
 @Composable
 fun ResultScreenPreview() {
     MarsPhotosTheme {
-        ResultScreen(stringResource(R.string.placeholder_result))
+        ResultScreen(MarsPhoto("123", "https://mars.jpl.nasa.gov/msl-raw-images/msss/01000/mcam/1000MR0044631300503690E01_DXXX.jpg"))
     }
 }
