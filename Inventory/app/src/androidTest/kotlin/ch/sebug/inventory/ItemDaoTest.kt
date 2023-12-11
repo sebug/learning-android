@@ -92,4 +92,12 @@ class ItemDaoTest {
         val allItemsAfter = itemDao.getAll().first()
         assertEquals(0, allItemsAfter.size)
     }
+
+    @Test
+    @Throws(IOException::class)
+    fun daoGetItem_returnsItemFromDB() = runBlocking {
+        addOneItemToDb()
+        val item = itemDao.getItem(1)
+        assertEquals(item.first(), item1)
+    }
 }
