@@ -8,6 +8,7 @@ import ch.sebug.inventory.data.InventoryDatabase
 import ch.sebug.inventory.data.Item
 import ch.sebug.inventory.data.ItemDao
 import kotlinx.coroutines.flow.first
+import kotlinx.coroutines.flow.single
 import kotlinx.coroutines.runBlocking
 import org.junit.After
 import org.junit.Assert.assertEquals
@@ -78,5 +79,17 @@ class ItemDaoTest {
         itemDao.update(newItem)
         val newItemAfter = itemDao.getItem(itemId).first()
         assertEquals(quantityAfter, newItemAfter.quantity)
+    }
+
+    @Test
+    @Throws(IOException::class)
+    fun daoDeleteItems_deletesAllItemsFromDB() = runBlocking {
+        addTwoItemsToDb()
+        val allItems = itemDao.getAll().first()
+        allItems.forEach {
+            itemDao.delete(it)
+        }
+        val allItemsAfter = itemDao.getAll().first()
+        assertEquals(0, allItemsAfter.size)
     }
 }
