@@ -59,9 +59,24 @@ class ItemDaoTest {
 
     @Test
     @Throws(IOException::class)
-    fun daoGetAllItems_returnsAllItemsFromDB() = runBlocking{
+    fun daoGetAllItems_returnsAllItemsFromDB() = runBlocking {
         addTwoItemsToDb()
         val allItems = itemDao.getAll().first()
         assertEquals(2, allItems.size)
+    }
+
+    @Test
+    @Throws(IOException::class)
+    fun daoUpdateItems_updatesItemsInDB() = runBlocking {
+        addTwoItemsToDb()
+        val allItems = itemDao.getAll().first()
+        val item = allItems.last()
+        val quantityBefore = item.quantity
+        val quantityAfter = quantityBefore - 1
+        val itemId = item.id
+        val newItem = item.copy(quantity = quantityAfter)
+        itemDao.update(newItem)
+        val newItemAfter = itemDao.getItem(itemId).first()
+        assertEquals(quantityAfter, newItemAfter.quantity)
     }
 }
