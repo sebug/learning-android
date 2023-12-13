@@ -3,6 +3,7 @@ package ch.sebug.workmanager.data
 import android.content.Context
 import android.net.Uri
 import androidx.work.Data
+import androidx.work.OneTimeWorkRequest
 import androidx.work.OneTimeWorkRequestBuilder
 import androidx.work.WorkInfo
 import androidx.work.WorkManager
@@ -10,6 +11,8 @@ import ch.sebug.workmanager.KEY_BLUR_LEVEL
 import ch.sebug.workmanager.KEY_IMAGE_URI
 import ch.sebug.workmanager.getImageUri
 import ch.sebug.workmanager.workers.BlurWorker
+import ch.sebug.workmanager.workers.CleanupWorker
+import ch.sebug.workmanager.workers.SaveImageToFileWorker
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 
@@ -25,12 +28,20 @@ class WorkManagerBluromaticRepository(context: Context) : BluromaticRepository {
      * @param blurLevel The amount to blur the image
      */
     override fun applyBlur(blurLevel: Int) {
+        var continuation = workManager.beginWith(OneTimeWorkRequest.from(CleanupWorker::class.java))
+
         val blurBuilder = OneTimeWorkRequestBuilder<BlurWorker>()
 
         blurBuilder.setInputData(createInputDataForWorkRequest(blurLevel,
             imageUri))
 
-        workManager.enqueue(blurBuilder.build())
+        continuation = continuation.then(blurBuilder.build())
+
+        val save = OneTimeWorkRequestBuilder<SaveImageToFileWorker>()
+            .build()
+        continuation = continuation.then(save)
+
+        continuation.enqueue()
     }
 
     /**
