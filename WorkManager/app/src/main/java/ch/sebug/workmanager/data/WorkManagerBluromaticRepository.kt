@@ -11,19 +11,29 @@ import androidx.work.WorkManager
 import ch.sebug.workmanager.IMAGE_MANIPULATION_WORK_NAME
 import ch.sebug.workmanager.KEY_BLUR_LEVEL
 import ch.sebug.workmanager.KEY_IMAGE_URI
+import ch.sebug.workmanager.TAG_OUTPUT
 import ch.sebug.workmanager.getImageUri
 import ch.sebug.workmanager.workers.BlurWorker
 import ch.sebug.workmanager.workers.CleanupWorker
 import ch.sebug.workmanager.workers.SaveImageToFileWorker
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.mapNotNull
 
 class WorkManagerBluromaticRepository(context: Context) : BluromaticRepository {
 
     private var imageUri: Uri = context.getImageUri()
     private val workManager = WorkManager.getInstance(context)
 
-    override val outputWorkInfo: Flow<WorkInfo?> = MutableStateFlow(null)
+    override val outputWorkInfo: Flow<WorkInfo> =
+        workManager.getWorkInfosByTagFlow(TAG_OUTPUT)
+            .mapNotNull {
+                if (it.isEmpty()) {
+                    null
+                } else {
+                    it.first()
+                }
+            }
 
     /**
      * Create the WorkRequests to apply the blur and save the resulting image
@@ -43,6 +53,7 @@ class WorkManagerBluromaticRepository(context: Context) : BluromaticRepository {
         continuation = continuation.then(blurBuilder.build())
 
         val save = OneTimeWorkRequestBuilder<SaveImageToFileWorker>()
+            .addTag(TAG_OUTPUT)
             .build()
         continuation = continuation.then(save)
 
