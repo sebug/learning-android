@@ -8,6 +8,7 @@ import androidx.lifecycle.viewmodel.initializer
 import androidx.lifecycle.viewmodel.viewModelFactory
 import androidx.work.WorkInfo
 import ch.sebug.workmanager.BluromaticApplication
+import ch.sebug.workmanager.KEY_IMAGE_URI
 import ch.sebug.workmanager.data.BlurAmountData
 import ch.sebug.workmanager.data.BluromaticRepository
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -27,9 +28,11 @@ class BlurViewModel(private val bluromaticRepository: BluromaticRepository) : Vi
     val blurUiState: StateFlow<BlurUiState> =
         bluromaticRepository.outputWorkInfo
             .map { info ->
+                val outputImageUri =
+                    info.outputData.getString(KEY_IMAGE_URI)
                 when {
-                    info.state.isFinished -> {
-                        BlurUiState.Complete(outputUri = "")
+                    info.state.isFinished && !outputImageUri.isNullOrEmpty() -> {
+                        BlurUiState.Complete(outputUri = outputImageUri)
                     }
                     info.state == WorkInfo.State.CANCELLED -> {
                         BlurUiState.Default
@@ -39,6 +42,7 @@ class BlurViewModel(private val bluromaticRepository: BluromaticRepository) : Vi
             }.stateIn(scope = viewModelScope,
                 initialValue = BlurUiState.Default,
                 started = SharingStarted.WhileSubscribed(5_000))
+
 
     /**
      * Call the method from repository to create the WorkRequest to apply the blur
