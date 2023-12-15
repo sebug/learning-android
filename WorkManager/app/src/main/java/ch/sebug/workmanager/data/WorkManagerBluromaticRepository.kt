@@ -52,6 +52,8 @@ class WorkManagerBluromaticRepository(context: Context) : BluromaticRepository {
 
         val blurBuilder = OneTimeWorkRequestBuilder<BlurWorker>()
 
+
+
         blurBuilder.setInputData(createInputDataForWorkRequest(blurLevel,
             imageUri))
 
