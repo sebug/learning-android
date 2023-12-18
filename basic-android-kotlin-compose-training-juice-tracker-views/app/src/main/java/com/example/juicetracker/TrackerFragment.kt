@@ -24,6 +24,7 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
+import androidx.navigation.findNavController
 import com.example.juicetracker.databinding.FragmentTrackerBinding
 import com.example.juicetracker.ui.AppViewModelProvider
 import com.example.juicetracker.ui.JuiceListAdapter
@@ -56,7 +57,6 @@ class TrackerFragment : Fragment() {
         binding.recyclerView.adapter = adapter
 
         binding.fab.setOnClickListener { fabView ->
-
         }
 
         viewLifecycleOwner.lifecycleScope.launch {
