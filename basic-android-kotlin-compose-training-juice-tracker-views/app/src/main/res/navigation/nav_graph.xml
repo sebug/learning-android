@@ -24,4 +24,16 @@
         android:label="fragment_tracker"
         tools:layout="@layout/fragment_tracker" >
     </fragment>
+    <dialog
+        android:id="@+id/entryDialogFragment"
+        android:name="com.example.juicetracker.EntryDialogFragment"
+        android:label="EntryDialogFragment" >
+        <action
+            android:id="@+id/action_entryDialogFragment_to_trackerFragment2"
+            app:destination="@id/trackerFragment" />
+        <argument
+            android:name="itemId"
+            app:argType="long"
+            android:defaultValue="0L" />
+    </dialog>
 </navigation>
